@@ -1,0 +1,52 @@
+<% content_for :title, @settings.site_name %>
+
+<main class="boot-screen" style="--accent: <%= @settings.accent_color %>; --secondary: <%= @settings.secondary_color %>; --screen-bg: <%= @settings.background_color %>;">
+  <section class="crt-panel">
+    <header class="boot-header">
+      <div>
+        <p class="kicker">ARCADE BIOS v1.0</p>
+        <h1><%= @settings.site_name %></h1>
+      </div>
+      <%= link_to "ADMIN", admin_login_path, class: "terminal-link" %>
+    </header>
+
+    <div class="status-grid" aria-label="System status">
+      <span>VIDEO: RGB</span>
+      <span>INPUT: READY</span>
+      <span>COIN: FREE PLAY</span>
+    </div>
+
+    <section class="menu-shell" aria-labelledby="game-menu-title">
+      <div class="menu-copy">
+        <p class="kicker">MAIN MENU</p>
+        <h2 id="game-menu-title"><%= @settings.headline %></h2>
+        <p><%= @settings.subheadline %></p>
+      </div>
+
+      <div class="game-list">
+        <% if @games.any? %>
+          <% @games.each_with_index do |game, index| %>
+            <%= link_to game.url, class: "game-row", target: "_self" do %>
+              <span class="slot"><%= format("%02d", index + 1) %></span>
+              <span class="game-copy">
+                <strong><%= game.title %></strong>
+                <small><%= game.cabinet_code %> / <%= game.genre %></small>
+              </span>
+              <span class="launch">LOAD</span>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="empty-state">
+            <strong>NO GAME ROMS FOUND</strong>
+            <span>Add games from the admin console.</span>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <footer class="boot-footer">
+      <span><%= @settings.footer_note %></span>
+      <span>ESC: BACK / ENTER: START</span>
+    </footer>
+  </section>
+</main>

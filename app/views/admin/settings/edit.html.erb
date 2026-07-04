@@ -1,0 +1,54 @@
+<% content_for :title, "Edit Boot Menu" %>
+
+<main class="admin-screen">
+  <section class="admin-card">
+    <p class="kicker">BOOT SCREEN</p>
+    <h1>Edit Page</h1>
+
+    <%= render "shared/errors", record: @settings %>
+
+    <%= form_with model: @settings, url: admin_settings_path, class: "stacked-form" do |form| %>
+      <div class="field">
+        <%= form.label :site_name %>
+        <%= form.text_field :site_name, required: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :headline %>
+        <%= form.text_field :headline, required: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :subheadline %>
+        <%= form.text_field :subheadline, required: true %>
+      </div>
+
+      <div class="split-fields">
+        <div class="field">
+          <%= form.label :accent_color %>
+          <%= form.color_field :accent_color %>
+        </div>
+
+        <div class="field">
+          <%= form.label :secondary_color %>
+          <%= form.color_field :secondary_color %>
+        </div>
+
+        <div class="field">
+          <%= form.label :background_color %>
+          <%= form.color_field :background_color %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :footer_note %>
+        <%= form.text_field :footer_note, required: true %>
+      </div>
+
+      <div class="form-actions">
+        <%= form.submit "Save Boot Menu", class: "button primary" %>
+        <%= link_to "Cancel", admin_root_path, class: "button ghost" %>
+      </div>
+    <% end %>
+  </section>
+</main>

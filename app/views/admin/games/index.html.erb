@@ -1,0 +1,31 @@
+<% content_for :title, "Manage Games" %>
+
+<main class="admin-screen">
+  <section class="admin-card wide">
+    <header class="admin-header">
+      <div>
+        <p class="kicker">GAME REGISTRY</p>
+        <h1>Manage Games</h1>
+      </div>
+      <nav class="admin-actions">
+        <%= link_to "Dashboard", admin_root_path, class: "button ghost" %>
+        <%= link_to "Add Game", new_admin_game_path, class: "button primary" %>
+      </nav>
+    </header>
+
+    <%= render "shared/flash" %>
+
+    <div class="game-list admin-list">
+      <% @games.each do |game| %>
+        <div class="game-row static-row">
+          <span class="slot"><%= game.position %></span>
+          <span class="game-copy">
+            <strong><%= game.title %></strong>
+            <small><%= game.url %> / <%= game.published? ? "Published" : "Hidden" %></small>
+          </span>
+          <%= link_to "EDIT", edit_admin_game_path(game), class: "launch" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</main>

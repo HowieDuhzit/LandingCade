@@ -1,0 +1,496 @@
+:root {
+  color-scheme: dark;
+  --ink: #e8fff3;
+  --muted: #8ba99a;
+  --danger: #ff4d6d;
+  --panel: rgba(4, 9, 12, 0.86);
+  --line: rgba(57, 255, 20, 0.32);
+  --shadow: rgba(0, 0, 0, 0.62);
+  --font-display: "Courier New", "Nimbus Mono PS", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #07090f;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.boot-screen,
+.admin-screen {
+  min-height: 100vh;
+  padding: clamp(16px, 3vw, 36px);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 50%, rgba(0, 0, 0, 0.11) 50%) 0 0 / 100% 4px,
+    radial-gradient(circle at 50% 8%, rgba(57, 255, 20, 0.18), transparent 34%),
+    var(--screen-bg, #07090f);
+  overflow-x: hidden;
+}
+
+.boot-screen::before,
+.admin-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  border: 12px solid rgba(0, 0, 0, 0.42);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.72);
+}
+
+.crt-panel,
+.admin-card {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px var(--shadow), inset 0 0 32px rgba(57, 255, 20, 0.07);
+}
+
+.crt-panel {
+  min-height: calc(100vh - clamp(32px, 6vw, 72px));
+  display: flex;
+  flex-direction: column;
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.boot-header,
+.admin-header,
+.section-heading,
+.boot-footer,
+.status-grid,
+.form-actions,
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.boot-header,
+.admin-header,
+.section-heading,
+.boot-footer {
+  justify-content: space-between;
+}
+
+.boot-header,
+.admin-header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 18px;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  color: var(--secondary, #ffcc00);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: var(--accent, #39ff14);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--accent, #39ff14) 55%, transparent);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 8vw, 6.5rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 3.5rem);
+}
+
+.terminal-link,
+.link-button {
+  color: var(--secondary, #ffcc00);
+  text-decoration: none;
+  text-transform: uppercase;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.terminal-link:hover,
+.link-button:hover {
+  color: var(--accent, #39ff14);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 18px 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.status-grid span {
+  padding: 12px;
+  color: var(--muted);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.status-grid span:last-child {
+  border-right: 0;
+}
+
+.menu-shell {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(20px, 4vw, 52px);
+  align-items: start;
+  flex: 1;
+  padding: clamp(18px, 3vw, 38px) 0;
+}
+
+.menu-copy p:not(.kicker) {
+  max-width: 34rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.game-list {
+  display: grid;
+  gap: 10px;
+}
+
+.game-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  min-height: 74px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: var(--ink);
+  text-decoration: none;
+  background: linear-gradient(90deg, rgba(57, 255, 20, 0.1), rgba(255, 204, 0, 0.03));
+}
+
+.game-row:hover {
+  border-color: var(--accent, #39ff14);
+  transform: translateX(6px);
+}
+
+.slot,
+.launch {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  border: 1px solid currentColor;
+  color: var(--accent, #39ff14);
+}
+
+.game-copy {
+  min-width: 0;
+}
+
+.game-copy strong,
+.game-copy small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.game-copy strong {
+  text-transform: uppercase;
+}
+
+.game-copy small,
+.hint,
+.settings-list,
+.empty-state,
+.boot-footer {
+  color: var(--muted);
+}
+
+.launch {
+  min-width: 76px;
+  padding: 0 10px;
+  color: var(--secondary, #ffcc00);
+}
+
+.empty-state {
+  padding: 24px;
+  border: 1px dashed var(--line);
+}
+
+.empty-state span {
+  display: block;
+  margin-top: 8px;
+}
+
+.boot-footer {
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.admin-screen {
+  --screen-bg: #090d14;
+  --accent: #39ff14;
+  --secondary: #ffcc00;
+  display: grid;
+  place-items: start center;
+}
+
+.admin-card {
+  padding: clamp(18px, 3vw, 30px);
+}
+
+.admin-card:not(.wide) {
+  max-width: 760px;
+}
+
+.login-card {
+  margin-top: 10vh;
+}
+
+.admin-card h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.admin-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--secondary, #ffcc00);
+  color: var(--secondary, #ffcc00);
+  background: rgba(255, 204, 0, 0.07);
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button.primary {
+  border-color: var(--accent, #39ff14);
+  color: #041008;
+  background: var(--accent, #39ff14);
+}
+
+.button.ghost {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: var(--ink);
+}
+
+.button.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(255, 77, 109, 0.09);
+}
+
+.stacked-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label,
+.check-field {
+  color: var(--secondary, #ffcc00);
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  padding: 12px;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.34);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--accent, #39ff14);
+  outline-offset: 2px;
+}
+
+.split-fields,
+.console-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.console-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+  margin: 22px 0;
+}
+
+.console-panel {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.console-panel h2 {
+  margin-bottom: 14px;
+  font-size: 1.25rem;
+}
+
+.settings-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.settings-list div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+}
+
+.settings-list dt {
+  color: var(--secondary, #ffcc00);
+}
+
+.settings-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.swatches {
+  display: grid;
+  gap: 10px;
+}
+
+.swatches span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swatches span::before {
+  content: "";
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: var(--swatch);
+}
+
+.admin-table {
+  display: grid;
+  gap: 1px;
+  overflow-x: auto;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 80px 1.1fr 1.2fr 110px 120px;
+  gap: 12px;
+  min-width: 780px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.table-head {
+  color: var(--secondary, #ffcc00);
+  text-transform: uppercase;
+}
+
+.table-row small {
+  display: block;
+  color: var(--muted);
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.static-row:hover {
+  transform: none;
+}
+
+.flash,
+.error-box {
+  margin: 18px 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: rgba(57, 255, 20, 0.08);
+}
+
+.flash.alert,
+.error-box {
+  border-color: var(--danger);
+  background: rgba(255, 77, 109, 0.09);
+}
+
+.error-box ul {
+  margin: 10px 0 0;
+}
+
+code {
+  color: var(--secondary, #ffcc00);
+}
+
+@media (max-width: 820px) {
+  .menu-shell,
+  .console-grid,
+  .split-fields,
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-grid span {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .status-grid span:last-child {
+    border-bottom: 0;
+  }
+
+  .boot-header,
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .game-row {
+    grid-template-columns: 46px minmax(0, 1fr);
+  }
+
+  .launch {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

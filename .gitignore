@@ -1,0 +1,27 @@
+# Rails/runtime
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/.keep
+
+# Secrets and environment
+/.env*
+!/.env.coolify.example
+/config/master.key
+/config/credentials/*.key
+/.kamal
+/config/deploy*.yml
+
+# Dependencies and build output
+/.bundle
+/vendor/bundle
+/node_modules
+/public/assets
+
+# Local/editor files
+.DS_Store
+*.swp

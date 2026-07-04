@@ -1,0 +1,45 @@
+<%= render "shared/errors", record: game %>
+
+<%= form_with model: [:admin, game], class: "stacked-form" do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url, "Game URL" %>
+    <%= form.text_field :url, required: true, placeholder: "/games/example" %>
+  </div>
+
+  <div class="split-fields">
+    <div class="field">
+      <%= form.label :cabinet_code %>
+      <%= form.text_field :cabinet_code, required: true, maxlength: 12 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :genre %>
+      <%= form.text_field :genre, required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :position %>
+      <%= form.number_field :position, min: 0, required: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4 %>
+  </div>
+
+  <label class="check-field">
+    <%= form.check_box :published %>
+    Published on menu
+  </label>
+
+  <div class="form-actions">
+    <%= form.submit class: "button primary" %>
+    <%= link_to "Cancel", admin_root_path, class: "button ghost" %>
+  </div>
+<% end %>

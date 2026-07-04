@@ -1,0 +1,22 @@
+<% content_for :title, "Admin Login" %>
+
+<main class="admin-screen">
+  <section class="admin-card login-card">
+    <p class="kicker">OPERATOR ACCESS</p>
+    <h1>Admin Login</h1>
+
+    <%= render "shared/flash" %>
+
+    <%= form_with url: admin_login_path, class: "stacked-form" do |form| %>
+      <div class="field">
+        <%= form.label :password, "Access code" %>
+        <%= form.password_field :password, autofocus: true, autocomplete: "current-password" %>
+      </div>
+
+      <%= form.submit "Unlock Console", class: "button primary" %>
+    <% end %>
+
+    <p class="hint">Set <code>ADMIN_PASSWORD</code> in production. Local fallback: <code>arcade-admin</code>.</p>
+    <%= link_to "Return to menu", root_path, class: "terminal-link" %>
+  </section>
+</main>
