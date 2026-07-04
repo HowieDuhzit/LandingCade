@@ -28,4 +28,12 @@
 - [x] Add Coolify Docker Compose config with persistent SQLite storage.
 - [x] Add production env example and README deployment notes.
 - [x] Validate Rails tests and Compose config.
-- [ ] Initialize Git repository, commit, create GitHub repo, and push.
+- [x] Initialize Git repository, commit, create GitHub repo, and push.
+
+## Coolify Publish Review
+
+- Added `compose.yaml` for Coolify with a single Rails service, persistent `arcade_storage` volume, `/up` healthcheck, and required `SECRET_KEY_BASE`/`ADMIN_PASSWORD` env vars.
+- Added `.env.coolify.example` and README Coolify deployment notes.
+- Changed admin login to use `ADMIN_PASSWORD` directly so production deploys do not require `config/master.key`.
+- Verification passed: `bin/rails test` and `SECRET_KEY_BASE=testsecret ADMIN_PASSWORD=testpassword docker compose -f compose.yaml config`.
+- Created GitHub repo and pushed `main`: https://github.com/HowieDuhzit/LandingCade
