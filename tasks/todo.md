@@ -44,3 +44,10 @@
 - [x] Changed Dockerfile lint directive to skip `SecretsUsedInArgOrEnv`, which falsely flags Rails' `SECRET_KEY_BASE_DUMMY=1` asset precompile workaround.
 - [x] Re-run tests and compose validation.
 - [x] Commit and push the fix.
+
+## Coolify Bundler Fix
+
+- [x] Captured the Bundler frozen-checksum failure lesson.
+- [x] Repaired `Gemfile.lock` with `bundle lock --add-checksums`.
+- [x] Verify Rails tests, compose config, and Docker build.
+- [x] Commit and push the lockfile fix.
