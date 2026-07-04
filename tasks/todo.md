@@ -37,3 +37,10 @@
 - Changed admin login to use `ADMIN_PASSWORD` directly so production deploys do not require `config/master.key`.
 - Verification passed: `bin/rails test` and `SECRET_KEY_BASE=testsecret ADMIN_PASSWORD=testpassword docker compose -f compose.yaml config`.
 - Created GitHub repo and pushed `main`: https://github.com/HowieDuhzit/LandingCade
+
+## Coolify Build Fix
+
+- [x] Captured the BuildKit lint failure lesson.
+- [x] Changed Dockerfile lint directive to skip `SecretsUsedInArgOrEnv`, which falsely flags Rails' `SECRET_KEY_BASE_DUMMY=1` asset precompile workaround.
+- [x] Re-run tests and compose validation.
+- [x] Commit and push the fix.
